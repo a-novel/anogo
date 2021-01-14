@@ -6,6 +6,8 @@ AnoGo is an util package for Go, used by most A-Novel repositories.
 go get github.com/a-novel/anogo
 ```
 
+- [Map functions](#map-functions)
+    - [ToMap functions](#tomap-functions)
 - [Pointer functions](#pointer-functions)
     - [IsPtr](#isptr)
     - [IsSlicePtr](#issliceptr)
