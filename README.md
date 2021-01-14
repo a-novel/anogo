@@ -6,6 +6,32 @@ AnoGo is an util package for Go, used by most A-Novel repositories.
 go get github.com/a-novel/anogo
 ```
 
+- [Pointer functions](#pointer-functions)
+    - [IsPtr](#isptr)
+    - [IsSlicePtr](#issliceptr)
+    
+# Map functions
+
+The following functions refer to map-like go types and their usage.
+
+## ToMap functions
+
+Perform conversions between map-like values.
+
+| Function           | Arguments                         |
+| :---               | :---                              |
+| `ToMap()`          | v `interface{}`<br/>ptr `pointer` |
+| `ToMapInterface()` | v `interface{}`                   |
+| `ToMapString()`    | v `interface{}`                   |
+
+Each function may return any of the following errors:
+
+- `anogo.ErrIsNotPtr`
+- `anogo.ErrIsNestedPtr`
+- `anogo.ErrIsNotMappable`
+- `anogo.ErrCannotMarshal`
+- `anogo.ErrCannotUnmarshal`
+
 # Pointer functions
 
 The following functions refer to pointers and their usage.
