@@ -7,6 +7,11 @@ import (
 	"reflect"
 )
 
+type ToMapOptions struct {
+	PreservePointers bool
+	PreserveStructs bool
+}
+
 /*
 	Convert v to the underlying value of ptr.
 
@@ -90,6 +95,47 @@ func ToMapString(v interface{}) (map[string]string, *errors.Error) {
 	var output map[string]string
 	if err := ToMap(v, &output); err != nil {
 		return nil, err
+	}
+
+	return output, nil
+}
+
+func Flatten(data interface{}) (map[string]interface{}, *errors.Error) {
+	if data == nil {
+		return nil, nil
+	}
+
+	output := map[string]interface{}{}
+
+	mdata, err := ToMapInterface(data)
+	if err != nil {
+		return nil, err
+	}
+
+	for k, v := range mdata {
+		if v == nil {
+			output[k] = v
+			continue
+		}
+
+		for reflect.TypeOf(v).Kind() == reflect.Ptr {
+			v = reflect.ValueOf(v).Elem().Interface()
+		}
+
+		kind := reflect.TypeOf(v).Kind()
+
+		if kind == reflect.Map || kind == reflect.Struct {
+			flattened, err := Flatten(v)
+			if err != nil {
+				return nil, err
+			}
+
+			for sk, sv := range flattened {
+				output[fmt.Sprintf("%s.%s", k, sk)] = sv
+			}
+		} else {
+			output[k] = v
+		}
 	}
 
 	return output, nil

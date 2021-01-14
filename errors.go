@@ -7,4 +7,5 @@ const (
 	ErrIsNotMappable   = "err_is_not_mappable"
 	ErrCannotMarshal   = "err_cannot_marshal"
 	ErrCannotUnmarshal = "err_cannot_unmarshal"
+	ErrIsNotMap = "err_is_not_map"
 )

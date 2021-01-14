@@ -34,6 +34,21 @@ Each function may return any of the following errors:
 - `anogo.ErrCannotMarshal`
 - `anogo.ErrCannotUnmarshal`
 
+## Flatten
+
+Flatten a map-like object.
+
+```go
+flattened, err := anogo.Flatten(data)
+```
+
+Data should be either of type struct or map.
+
+It may return any of the following errors:
+
+- `anogo.ErrCannotMarshal`
+- `anogo.ErrCannotUnmarshal`
+
 # Pointer functions
 
 The following functions refer to pointers and their usage.
