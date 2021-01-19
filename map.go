@@ -100,6 +100,16 @@ func ToMapString(v interface{}) (map[string]string, *errors.Error) {
 	return output, nil
 }
 
+/*
+	Flattens a map-like object.
+
+	May return:
+		- ErrIsNotPtr
+		- ErrIsNestedPtr
+		- ErrIsNotMappable
+		- ErrCannotMarshal
+		- ErrCannotUnmarshal
+*/
 func Flatten(data interface{}) (map[string]interface{}, *errors.Error) {
 	if data == nil {
 		return nil, nil

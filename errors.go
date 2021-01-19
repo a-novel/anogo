@@ -8,4 +8,6 @@ const (
 	ErrCannotMarshal   = "err_cannot_marshal"
 	ErrCannotUnmarshal = "err_cannot_unmarshal"
 	ErrCannotReadFilePath = "err_cannot_read_path_file"
+	ErrCannotOpenConfigFile   = "err_cannot_open_config_file"
+	ErrCannotParseConfigFile  = "err_cannot_parse_config_file"
 )

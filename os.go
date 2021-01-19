@@ -6,6 +6,12 @@ import (
 	"runtime"
 )
 
+/*
+	Return go executable path.
+
+	May return:
+		- ErrCannotReadFilePath
+*/
 func GetExecPath() (string, *errors.Error) {
 	_, filename, _, ok := runtime.Caller(1)
 	if !ok {
