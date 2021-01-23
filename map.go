@@ -9,7 +9,7 @@ import (
 
 type ToMapOptions struct {
 	PreservePointers bool
-	PreserveStructs bool
+	PreserveStructs  bool
 }
 
 /*

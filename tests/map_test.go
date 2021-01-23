@@ -77,16 +77,16 @@ func TestToMapInterface(t *testing.T) {
 
 func TestFlatten(t *testing.T) {
 	type subStruct struct {
-		Foo string `json:"foo"`
+		Foo string   `json:"foo"`
 		Qux []string `json:"qux"`
 	}
 
 	type mainStruct struct {
-		SKey string `json:"s_key"`
-		IKey float64 `json:"i_key"`
-		MKey map[string]interface{} `json:"m_key"`
+		SKey  string                 `json:"s_key"`
+		IKey  float64                `json:"i_key"`
+		MKey  map[string]interface{} `json:"m_key"`
 		MKeyN map[string]interface{} `json:"m_key_n"`
-		StKey subStruct `json:"st_key"`
+		StKey subStruct              `json:"st_key"`
 	}
 
 	strKey := "john"
@@ -98,9 +98,9 @@ func TestFlatten(t *testing.T) {
 		SKey: "hello world",
 		IKey: 123456,
 		MKey: map[string]interface{}{
-			"name": &strKey,
+			"name":       &strKey,
 			"lastonline": 123456,
-			"userSt": &subsKey,
+			"userSt":     &subsKey,
 		},
 		StKey: subStruct{
 			Foo: "bar",
@@ -114,12 +114,12 @@ func TestFlatten(t *testing.T) {
 	}
 
 	key, ok := flatMapEqual(out, map[string]interface{}{
-		"s_key": "hello world",
-		"i_key": float64(123456),
-		"m_key_n": nil,
-		"st_key.foo": "bar",
-		"st_key.qux": []string{"quux", "quuux"},
-		"m_key.name": "john",
+		"s_key":            "hello world",
+		"i_key":            float64(123456),
+		"m_key_n":          nil,
+		"st_key.foo":       "bar",
+		"st_key.qux":       []string{"quux", "quuux"},
+		"m_key.name":       "john",
 		"m_key.lastonline": float64(123456),
 		"m_key.userSt.foo": "barbar",
 		"m_key.userSt.qux": nil,
