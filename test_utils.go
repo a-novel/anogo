@@ -35,7 +35,7 @@ func TestPostJSON(url string, body interface{}, expectedStatus int, expectedResp
 	if st != expectedStatus {
 		return errors.New(
 			ErrUnexpectedResponseStatus,
-			fmt.Sprintf("unexpected response status : got %v instead of %v", st, expectedStatus),
+			fmt.Sprintf("unexpected response status : got %v instead of %v\n%s", st, expectedStatus, string(bb)),
 		)
 	}
 
