@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func PostJSON(url string, payload interface{}) (int, []byte, *errors.Error) {
+func PostWithHeader(url string, payload interface{}, headers map[string]string) (int, []byte, *errors.Error) {
 	mrsh, err := json.Marshal(payload)
 	if err != nil {
 		return 0, nil, errors.New(ErrCannotMarshal, fmt.Sprintf("cannot marshal payload : %s", err.Error()))
@@ -20,7 +20,12 @@ func PostJSON(url string, payload interface{}) (int, []byte, *errors.Error) {
 		return 0, nil, errors.New(ErrCannotCreatePostRequest, fmt.Sprintf("cannot create post request : %s", err.Error()))
 	}
 
-	req.Header.Set("Content-Type", "application/json")
+	if headers != nil && len(headers) > 0 {
+		for k, v := range headers {
+			req.Header.Add(k, v)
+		}
+	}
+
 	client := &http.Client{}
 
 	resp, err := client.Do(req)
@@ -36,4 +41,8 @@ func PostJSON(url string, payload interface{}) (int, []byte, *errors.Error) {
 	}
 
 	return resp.StatusCode, output, nil
+}
+
+func PostJSON(url string, payload interface{}) (int, []byte, *errors.Error) {
+	return PostWithHeader(url, payload, map[string]string{"Content-Type": "application/json"})
 }
