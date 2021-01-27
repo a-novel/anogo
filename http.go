@@ -22,7 +22,7 @@ func PostWithHeader(url string, payload interface{}, headers map[string]string) 
 
 	if headers != nil && len(headers) > 0 {
 		for k, v := range headers {
-			req.Header.Add(k, v)
+			req.Header.Set(k, v)
 		}
 	}
 
