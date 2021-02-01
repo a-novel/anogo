@@ -26,7 +26,10 @@ func StartGinTestServer(routers []func (*gin.Engine)) (*httptest.Server, func(p 
 }
 
 func TestPostJSON(url string, body interface{}, expectedStatus int, expectedResponse map[string]interface{}) *errors.Error {
-	st, bb, err := PostJSON(url, body)
+	header := Header{}
+	header.JSON()
+
+	st, bb, err := Post(url, body, header)
 
 	if err != nil {
 		return err
